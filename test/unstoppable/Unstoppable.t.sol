@@ -92,7 +92,25 @@ contract UnstoppableChallenge is Test {
      * CODE YOUR SOLUTION HERE
      */
     function test_unstoppable() public checkSolvedByPlayer {
-        
+        /*
+        * Explanation:
+        * In order to make vault halt, we need to find a way to force flashLoan method to revert.
+        * There are 4 revert statements, however 3 of them are related to user provided inputs.
+        * Since we have to break in a way that it will revert Monitor's flashloan request, we have to focus on
+        * the fourth revert statement. Which is: 
+        * convertToShares(totalSupply) != balanceBefore // Check if shares - assets balance is fine.
+        * balanceBefore = Total Assets (underlying tokens)(underlying balance of Vault)(1m currently)
+        * totalSupply = Total supply of shares (minted-burned)(circulating)(1m currently)
+        * convertToShares(totalSupply) = totalSupply*totalSupply/totalAssets = 1m shares * 1m shares / 1m assets
+        * Our Condition is ->  totalSupply*totalSupply/totalAssets != totalAssets
+        * We can't have control on totalSupply (without depositing), but we can try to change totalAssets.
+        * In this case, we can't see any fallback in vault. So it doesn't reject transfers without deposit.
+        * If we send 1 asset without depositing, directly via ERC20 interface of the token,
+        * totalAssets will become (1m + 1) tokens.
+        * When it checks the condition, equation will not be satisfied and it will revert.
+        * TODO: Mitigation? Why is this requirement used?
+        */
+        token.transfer(address(vault), 1);
     }
 
     /**
