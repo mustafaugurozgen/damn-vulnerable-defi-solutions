@@ -8,4 +8,4 @@ I update repo as I solve any of the challenges. Solution code of each is written
 
 ## Solutions (so far)
 
-* [Unstoppable](https://github.com/mustafaugurozgen/damn-vulnerable-defi-solutions/blob/8eb38eff704e87c90fe5297b16cdeaec21eed01f/test/unstoppable/Unstoppable.t.sol#L94)
+* [Unstoppable](test/unstoppable/Unstoppable.t.sol)
