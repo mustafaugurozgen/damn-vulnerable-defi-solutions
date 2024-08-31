@@ -5,6 +5,7 @@ pragma solidity =0.8.25;
 import {Test, console} from "forge-std/Test.sol";
 import {DamnValuableToken} from "../../src/DamnValuableToken.sol";
 import {TrusterLenderPool} from "../../src/truster/TrusterLenderPool.sol";
+import {Attacker} from "./Attacker.sol";
 
 contract TrusterChallenge is Test {
     address deployer = makeAddr("deployer");
@@ -48,10 +49,13 @@ contract TrusterChallenge is Test {
     }
 
     /**
-     * CODE YOUR SOLUTION HERE
+     * In this challenge, since we have to exploit in single transaction,
+     * i have implemented exploit in constructor of the Attacker contract.
+     * Check it for explanation.
      */
     function test_truster() public checkSolvedByPlayer {
-        
+        Attacker attacker;
+        attacker = new Attacker(address(pool), address(token), address(recovery));
     }
 
     /**
