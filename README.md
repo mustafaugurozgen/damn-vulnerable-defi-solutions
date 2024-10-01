@@ -9,3 +9,6 @@ I update repo as I solve any of the challenges. Solution code of each is written
 ## Solutions (so far)
 
 * [Unstoppable](test/unstoppable/Unstoppable.t.sol)
+* [Side Entrance](test/side-entrance/SideEntrance.t.sol)
+* [Truster](test/truster/Truster.t.sol)
+* [ABI Smuggling](test/abi-smuggling/ABISmuggling.t.sol)
