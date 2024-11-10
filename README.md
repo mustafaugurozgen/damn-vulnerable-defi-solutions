@@ -12,3 +12,4 @@ I update repo as I solve any of the challenges. Solution code of each is written
 * [Side Entrance](test/side-entrance/SideEntrance.t.sol)
 * [Truster](test/truster/Truster.t.sol)
 * [ABI Smuggling](test/abi-smuggling/ABISmuggling.t.sol)
+* [Selfie](test/selfie/Selfie.t.sol)

